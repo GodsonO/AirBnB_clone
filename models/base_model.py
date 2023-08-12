@@ -30,6 +30,11 @@ class BaseModel:
         else:
             models.storage.new(self)
 
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
+
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.today()
@@ -45,8 +50,3 @@ class BaseModel:
         rdict["updated_at"] = self.updated_at.isoformat()
         rdict["__class__"] = self.__class__.__name__
         return rdict
-
-    def __str__(self):
-        """Return the print/str representation of the BaseModel instance."""
-        clname = self.__class__.__name__
-        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
