@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" init for class FileStorage """
+""" __init__ magic method for class FileStorage """
 from models.engine.file_storage import FileStorage
 storage = FileStorage()
 storage.reload()
