@@ -35,6 +35,17 @@ class FileStorage:
             object_dict = {obj: o_dict[obj].to_dict() for obj in o_dict.keys()}
             json.dump(object_dict, f)
 
+    def classes(self):
+        """Returns a dictionary of valid classes and their references"""
+        classes = {"BaseModel": BaseModel,
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review}
+        return classes
+
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
         try:
