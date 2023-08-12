@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """Defines the BaseModel class."""
-from models import storage
+import models
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-    """The BaseModel of the HBnB project."""
+    """Represents the BaseModel of the HBnB project."""
 
     def __init__(self, *args, **kwargs):
         """Initialize a new BaseModel.
@@ -14,16 +14,16 @@ class BaseModel:
             *args (any): Unused.
             **kwargs (dict): Key/value pairs of attributes.
         """
+        tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
         self.created_at = datetime.today()
         self.updated_at = datetime.today()
         if len(kwargs) != 0:
-            for key, v in kwargs.items():
-                if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(
-                        v, "%Y-%m-%dT%H:%M:%S.%f")
+            for k, v in kwargs.items():
+                if k == "created_at" or k == "updated_at":
+                    self.__dict__[k] = datetime.strptime(v, tform)
                 else:
-                    self.__dict__[key] = v
+                    self.__dict__[k] = v
         else:
             models.storage.new(self)
 
@@ -44,7 +44,6 @@ class BaseModel:
         return rdict
 
     def __str__(self):
-        """Return a str representation of the BaseModel instance."""
-        class_name = self.__class__.__name__
-        dic = self.__dict__
-        return "[{}] ({}) {}".format(class_name, self.id, dic)
+        """Return the print/str representation of the BaseModel instance."""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
