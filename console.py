@@ -103,14 +103,13 @@ class HBNBCommand(cmd.Cmd):
         """
         arg_l = parse(arg)
         obj_dict = storage.all()
-	o = "{}.{}".format(arg_l[0], arg_l[1])
         if len(arg_l) == 0:
             print("** class name missing **")
         elif arg_l[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         elif len(arg_l) == 1:
             print("** instance id missing **")
-        elif o not in obj_dict:
+        elif "{}.{}".format(arg_l[0], arg_l[1]) not in obj_dict:
             print("** no instance found **")
         else:
             print(obj_dict["{}.{}".format(arg_l[0], arg_l[1])])
