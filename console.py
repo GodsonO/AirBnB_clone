@@ -89,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
         Create a new class instance and print its id.
         """
         arg_l = parse(line)
-        if len(arg_l) == 0:
+        if not arg_l:
             print("** class name missing **")
         elif arg_l[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
