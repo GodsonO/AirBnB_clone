@@ -13,9 +13,9 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-def parse(arg):
-    curly_braces = re.search(r"\{(.*?)\}", arg)
-    bracket_match = re.search(r"\[(.*?)\]", arg)
+def parse(line):
+    curly_braces = re.search(r"\{(.*?)\}", line)
+    bracket_match = re.search(r"\[(.*?)\]", line)
 
     def tokenize_and_append(token, container):
         container.extend([i.strip(",") for i in split(token)])
@@ -23,15 +23,15 @@ def parse(arg):
     result = []
 
     if curly_braces:
-        tokenize_and_append(arg[:curly_braces.span()[0]], result)
+        tokenize_and_append(line[:curly_braces.span()[0]], result)
         result.append(curly_braces.group())
 
     elif bracket_match:
-        tokenize_and_append(arg[:bracket_match.span()[0]], result)
+        tokenize_and_append(line[:bracket_match.span()[0]], result)
         result.append(bracket_match.group())
 
     else:
-        tokenize_and_append(arg, result)
+        tokenize_and_append(line, result)
 
     return result
 
