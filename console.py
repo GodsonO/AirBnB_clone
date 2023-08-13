@@ -14,7 +14,7 @@ from models.review import Review
 
 
 def parse(arg):
-    curly_match = re.search(r"\{(.*?)\}", arg)
+    curly_braces = re.search(r"\{(.*?)\}", arg)
     bracket_match = re.search(r"\[(.*?)\]", arg)
 
     def tokenize_and_append(token, container):
@@ -22,9 +22,9 @@ def parse(arg):
 
     result = []
 
-    if curly_match:
-        tokenize_and_append(arg[:curly_match.span()[0]], result)
-        result.append(curly_match.group())
+    if curly_braces:
+        tokenize_and_append(arg[:curly_braces.span()[0]], result)
+        result.append(curly_braces.group())
 
     elif bracket_match:
         tokenize_and_append(arg[:bracket_match.span()[0]], result)
