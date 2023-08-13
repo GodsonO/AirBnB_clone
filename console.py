@@ -14,21 +14,26 @@ from models.review import Review
 
 
 def parse(arg):
-    curly_braces = re.search(r"\{(.*?)\}", arg)
-    brackets = re.search(r"\[(.*?)\]", arg)
-    if curly_braces is None:
-        if brackets is None:
-            return [i.strip(",") for i in split(arg)]
-        else:
-            lexer = split(arg[:brackets.span()[0]])
-            retl = [i.strip(",") for i in lexer]
-            retl.append(brackets.group())
-            return retl
+    curly_match = re.search(r"\{(.*?)\}", arg)
+    bracket_match = re.search(r"\[(.*?)\]", arg)
+
+    def tokenize_and_append(token, container):
+        container.extend([i.strip(",") for i in split(token)])
+
+    result = []
+
+    if curly_match:
+        tokenize_and_append(arg[:curly_match.span()[0]], result)
+        result.append(curly_match.group())
+
+    elif bracket_match:
+        tokenize_and_append(arg[:bracket_match.span()[0]], result)
+        result.append(bracket_match.group())
+
     else:
-        lexer = split(arg[:curly_braces.span()[0]])
-        retl = [i.strip(",") for i in lexer]
-        retl.append(curly_braces.group())
-        return retl
+        tokenize_and_append(arg, result)
+
+    return result
 
 
 class HBNBCommand(cmd.Cmd):
