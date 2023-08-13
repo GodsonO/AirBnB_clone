@@ -64,10 +64,10 @@ class HBNBCommand(cmd.Cmd):
             "update": self.do_update
         }
         match = re.search(r"\.", line)
-        if match is not None:
+        if match:
             arg_l = [line[:match.span()[0]], line[match.span()[1]:]]
             match = re.search(r"\((.*?)\)", arg_l[1])
-            if match is not None:
+            if match:
                 command = [arg_l[1][:match.span()[0]], match.group()[1:-1]]
                 if command[0] in arg_dict.keys():
                     call = "{} {}".format(arg_l[0], command[1])
