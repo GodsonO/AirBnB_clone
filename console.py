@@ -179,11 +179,13 @@ class HBNBCommand(cmd.Cmd):
             print("** attribute name missing **")
             return False
         if len(arg_l) == 3:
-            try:
-                type(eval(arg_l[2])) != dict
-            except NameError:
-                print("** value missing **")
-                return False
+		try:
+			value = eval(arg_l[2])
+		if not isinstance(value, dict):
+			return False
+		except NameError:
+			print("** value missing **")
+			return False
 
         if len(arg_l) == 4:
             obj = storage.all()["{}.{}".format(arg_l[0], arg_l[1])]
