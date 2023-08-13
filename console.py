@@ -133,17 +133,17 @@ class HBNBCommand(cmd.Cmd):
         """Usage: all or all <class> or <class>.all()
         Display string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
-        argl = parse(line)
-        if argl and argl[0] not in HBNBCommand.__classes.keys():
+        arg_l = parse(line)
+        if arg_l and arg_l[0] not in HBNBCommand.__classes.keys():
             print("** class doesn't exist **")
         else:
-            objl = []
-            for obj in storage.all().values():
-                if len(argl) > 0 and argl[0] == obj.__class__.__name__:
-                    objl.append(obj.__str__())
-                elif len(argl) == 0:
-                    objl.append(obj.__str__())
-            print(objl)
+            obj_l = []
+            for obj in (value for value in storage.all().values()):
+                if len(arg_l) > 0 and arg_l[0] == obj.__class__.__name__:
+                    obj_l.append(obj.__str__())
+                elif len(arg_l) == 0:
+                    obj_l.append(obj.__str__())
+            print(obj_l)
 
     def do_count(self, arg):
         """Usage: count <class> or <class>.count()
