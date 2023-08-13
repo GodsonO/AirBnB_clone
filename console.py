@@ -51,11 +51,11 @@ class HBNBCommand(cmd.Cmd):
         }
 
     def emptyline(self):
-        """Do nothing upon receiving an empty line."""
+        """Does nothing upon receiving an empty line."""
         pass
 
     def default(self, line):
-        """Default behavior for cmd module when input is invalid"""
+        """Default settings for cmd module when input is invalid"""
         arg_dict = {
             "all": self.do_all,
             "show": self.do_show,
@@ -85,8 +85,8 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """Usage: create <class>
-        Create a new class instance and print its id.
+        """
+        Creates an instance
         """
         arg_l = parse(line)
         if not arg_l:
@@ -98,8 +98,8 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, line):
-        """Usage: show <class> <id> or <class>.show(<id>)
-        Display the string representation of a class instance of a given id.
+        """
+        Prints the string representation of a class instance of a given id.
         """
         arg_l = parse(line)
         if not arg_l:
@@ -114,8 +114,9 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()["{}.{}".format(arg_l[0], arg_l[1])])
 
     def do_destroy(self, line):
-        """Usage: destroy <class> <id> or <class>.destroy(<id>)
-        Delete a class instance of a given id."""
+        """
+        Delete a class instance of a given id.
+        """
         arg_l = parse(line)
         if not arg_l:
             print("** class name missing **")
@@ -130,9 +131,9 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, line):
-        """Usage: all or all <class> or <class>.all()
+        """
         Display string representations of all instances of a given class.
-        If no class is specified, displays all instantiated objects."""
+        """
         arg_l = parse(line)
         if arg_l and arg_l[0] not in HBNBCommand.__classes.keys():
             print("** class doesn't exist **")
@@ -146,8 +147,9 @@ class HBNBCommand(cmd.Cmd):
             print(obj_l)
 
     def do_count(self, line):
-        """Usage: count <class> or <class>.count()
-        Retrieve the number of instances of a given class."""
+        """
+        Gets back the number of instances of a given class.
+        """
         arg_l = parse(line)
         count = 0
         for obj in (value for value in storage.all().values()):
@@ -156,11 +158,10 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_update(self, line):
-        """Usage: update <class> <id> <attribute_name> <attribute_value> or
-       <class>.update(<id>, <attribute_name>, <attribute_value>) or
-       <class>.update(<id>, <dictionary>)
+        """
         Update a class instance of a given id by adding or updating
-        a given attribute key/value pair or dictionary."""
+        a given attribute
+        """
         arg_l = parse(line)
 
         if not arg_l:
