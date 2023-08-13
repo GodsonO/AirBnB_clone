@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
         arg_l = parse(line)
         if not arg_l:
             print("** class name missing **")
-        elif arg_l[0] not in HBNBCommand.__classes:
+        elif arg_l[0] not in HBNBCommand.__classes.keys():
             print("** class doesn't exist **")
         else:
             print(eval(arg_l[0])().id)
