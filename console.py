@@ -97,15 +97,15 @@ class HBNBCommand(cmd.Cmd):
             print(eval(arg_l[0])().id)
             storage.save()
 
-    def do_show(self, arg):
+    def do_show(self, line):
         """Usage: show <class> <id> or <class>.show(<id>)
         Display the string representation of a class instance of a given id.
         """
-        arg_l = parse(arg)
+        arg_l = parse(line)
         obj_dict = storage.all()
-        if len(arg_l) == 0:
+        if not arg_l:
             print("** class name missing **")
-        elif arg_l[0] not in HBNBCommand.__classes:
+        elif arg_l[0] not in HBNBCommand.__classes.keys():
             print("** class doesn't exist **")
         elif len(arg_l) == 1:
             print("** instance id missing **")
