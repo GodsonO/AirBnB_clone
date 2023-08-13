@@ -185,7 +185,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
                 return False
 	
-	o = eval(arg_l[2])
         if len(arg_l) == 4:
             obj = storage.all()["{}.{}".format(arg_l[0], arg_l[1])]
             if arg_l[2] in obj.__class__.__dict__.keys():
@@ -193,9 +192,9 @@ class HBNBCommand(cmd.Cmd):
                 obj.__dict__[arg_l[2]] = valtype(arg_l[3])
             else:
                 obj.__dict__[arg_l[2]] = arg_l[3]
-        elif type(o) == dict:
+        elif type(eval(arg_l[2])) == dict:
             obj = storage.all()["{}.{}".format(arg_l[0], arg_l[1])]
-            for k, v in o.items():
+            for k, v in eval(arg_l[2]).items():
                 if (k in obj.__class__.__dict__.keys() and
                         type(obj.__class__.__dict__[k]) in {str, int, float}):
                     valtype = type(obj.__class__.__dict__[k])
