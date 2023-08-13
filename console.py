@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
             except NameError:
                 print("** value missing **")
                 return False
-	
+
         if len(arg_l) == 4:
             obj = storage.all()["{}.{}".format(arg_l[0], arg_l[1])]
             if arg_l[2] in obj.__class__.__dict__.keys():
