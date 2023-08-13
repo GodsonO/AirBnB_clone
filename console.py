@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
             match = re.search(r"\((.*?)\)", arg_l[1])
             if match:
                 command = [arg_l[1][:match.span()[0]], match.group()[1:-1]]
-                if command[0] in arg_dict.keys():
+                if command[0] in arg_dict:
                     call = "{} {}".format(arg_l[0], command[1])
                     return arg_dict[command[0]](call)
         print("*** Unknown syntax: {}".format(line))
