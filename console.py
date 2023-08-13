@@ -108,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(arg_l) == 1:
             print("** instance id missing **")
-        elif "{}.{}".format(arg_l[0], arg_l[1]) not in obj_dict:
+        elif "{}.{}".format(arg_l[0], arg_l[1]) not in storage.all():
             print("** no instance found **")
         else:
             print(storage.all()["{}.{}".format(arg_l[0], arg_l[1])])
