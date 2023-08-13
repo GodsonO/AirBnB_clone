@@ -102,7 +102,6 @@ class HBNBCommand(cmd.Cmd):
         Display the string representation of a class instance of a given id.
         """
         arg_l = parse(line)
-        obj_dict = storage.all()
         if not arg_l:
             print("** class name missing **")
         elif arg_l[0] not in HBNBCommand.__classes.keys():
@@ -112,7 +111,7 @@ class HBNBCommand(cmd.Cmd):
         elif "{}.{}".format(arg_l[0], arg_l[1]) not in obj_dict:
             print("** no instance found **")
         else:
-            print(obj_dict["{}.{}".format(arg_l[0], arg_l[1])])
+            print(storage.all()["{}.{}".format(arg_l[0], arg_l[1])])
 
     def do_destroy(self, arg):
         """Usage: destroy <class> <id> or <class>.destroy(<id>)
